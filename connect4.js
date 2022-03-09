@@ -18,15 +18,22 @@ var board = []; // array of rows, each row is array of cells  (board[y][x])
  */
 
 function makeBoard() {
-  // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  for (let i = 0; i < HEIGHT; i++) {
+    const boardRow = [];
+    for (let j = 0; j < WIDTH; j++) {
+      boardRow.push(null);
+    }
+    board.push(boardRow);
+  }
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-
-  // TODO: add comment for this code
+  const htmlBoard = document.querySelector("#board");
+  // creating the elem tr assigned to top with an attr of id
+  // and column-top and adding a click event listener
   var top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
@@ -47,15 +54,11 @@ function makeHtmlBoard() {
 
     for (var x = 0; x < WIDTH; x++) {
       // TODO: Create a table cell element and assign to a "cell" variable
-
       // TODO: add an id, y-x, to the above table cell element
       // you'll use this later, so make sure you use y-x
-
       // TODO: append the table cell to the table row
-
     }
     // TODO: append the row to the html board
-
   }
 }
 
@@ -109,17 +112,14 @@ function handleClick(evt) {
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
 function checkForWin() {
-
   /** _win:
    * takes input array of 4 cell coordinates [ [y, x], [y, x], [y, x], [y, x] ]
    * returns true if all are legal coordinates for a cell & all cells match
    * currPlayer
    */
   function _win(cells) {
-
     // TODO: Check four cells to see if they're all legal & all color of current
     // player
-
   }
 
   // using HEIGHT and WIDTH, generate "check list" of coordinates
@@ -132,7 +132,12 @@ function checkForWin() {
       // each should be an array of 4 cell coordinates:
       // [ [y, x], [y, x], [y, x], [y, x] ]
 
-      let horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
+      let horiz = [
+        [y, x],
+        [y, x + 1],
+        [y, x + 2],
+        [y, x + 3],
+      ];
       let vert;
       let diagDL;
       let diagDR;
