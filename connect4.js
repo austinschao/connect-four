@@ -30,18 +30,16 @@ function makeBoard() {
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
-  // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
   const htmlBoard = document.querySelector("#board");
-  // creating the elem tr assigned to top with an attr of id
-  // and column-top and adding a click event listener
+  // Create row to allow players to enter play piece
   let top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
 
-  // TODO: add comment for this code
-  for (var x = 0; x < WIDTH; x++) {
+  // Creating interactive row that player uses
+  for (let x = 0; x < WIDTH; x++) {
     let headCell = document.createElement("td");
-    headCell.setAttribute("id", x);
+    headCell.setAttribute("id", `${x}`);
     top.append(headCell);
   }
   htmlBoard.append(top);
@@ -50,21 +48,14 @@ function makeHtmlBoard() {
   // uses HEIGHT to create table rows
   // uses WIDTH to create table cells for each row
   for (let y = 0; y < HEIGHT; y++) {
-    // TODO: Create a table row element and assign to a "row" variable
-    let row = document.createElement('tr');
+    let row = document.createElement("tr");
 
     for (let x = 0; x < WIDTH; x++) {
-      // TODO: Create a table cell element and assign to a "cell" variable
-      let cell = document.createElement('td');
+      let cell = document.createElement("td");
 
-      // TODO: add an id, y-x, to the above table cell element
-      // you'll use this later, so make sure you use y-x
-      cell.setAttribute("id", "y-x");
-
-      // TODO: append the table cell to the table row
+      cell.setAttribute("id", `${y}-${x}`);
       row.appendChild(cell);
     }
-    // TODO: append the row to the html board
     htmlBoard.appendChild(row);
   }
 }
@@ -79,7 +70,18 @@ function findSpotForCol(x) {
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
+  let playPiece = document.createElement("div");
+  let correctCell = document.getElementById(`${y}-${x}`);
+
+  playPiece.classList.add("piece", `${currPlayer}`);
+
+  if (currPlayer === 1) {
+    playPiece.style.backgroundColor = "blue";
+  } else {
+    playPiece.style.backgroundColor = "red";
+  }
+
+  correctCell.appendChild(playPiece);
 }
 
 /** endGame: announce game end */
