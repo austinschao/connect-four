@@ -92,6 +92,7 @@ function placeInTable(y, x) {
 
 function endGame(msg) {
   // TODO: pop up alert message
+  alert(msg);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -140,7 +141,24 @@ function checkForWin() {
   function _win(cells) {
     // TODO: Check four cells to see if they're all legal & all color of current
     // player
-  }
+
+
+    // return cells.every(subArr => {
+
+    //   console.log(board[yCor][xCor]);
+    //   // return board[subArr[0]][subArr[1]] === currPlayer;
+    //   });
+    // let match;
+
+      for(let cell of cells){
+        // console.log(cell);
+        // let yCor = cell[0];
+        // let xCor = cell[1];
+        console.log(board[cell[0]][cell[1]]); 
+      }
+
+    }
+
 
   // using HEIGHT and WIDTH, generate "check list" of coordinates
   // for 4 cells (starting here) for each of the different
@@ -156,18 +174,35 @@ function checkForWin() {
         [y, x],
         [y, x + 1],
         [y, x + 2],
-        [y, x + 3],
+        [y, x + 3]
       ];
-      let vert;
-      let diagDL;
-      let diagDR;
-
+      let vert = [
+        [y + x],
+        [y + 1, x],
+        [y + 2, x],
+        [y + 3, x]
+      ];
+      let diagDL = [
+        [y, y]
+        [y + 1, x - 1],
+        [y + 2, x - 2],
+        [y +3, x - 3]
+      ]
+      ;
+      let diagDR = [
+        [y, x],
+        [y + 1, x + 1],
+        [y + 2, x + 2],
+        [y + 3, x + 3]
+      ];
+    
       // find winner (only checking each win-possibility as needed)
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
         return true;
       }
     }
   }
+
 }
 
 makeBoard();
